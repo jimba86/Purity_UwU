@@ -63,7 +63,7 @@ Step | Description | Illustration
 ------------- | ------------- | -------------
 1 | Install [**Python3.10 from Microsoft Store**](https://apps.microsoft.com/store/detail/python-310/9PJPW5LDXLZ5) | ____________________________________________________	![image](https://user-images.githubusercontent.com/46110534/197253467-50895e35-e9ac-42a4-b7fd-e7bcfe45278b.png)
 2 | Create a new empty folder as your Working Directory<br />(C:/work, D:/mywork ...) | self-explanatory
-3 | Download [**installer.ps1**](https://github.com/brokeDude2901/Purity_UwU/releases/download/main/installer.ps1) and put it into your Working Directory | self-explanatory
+3 | Download [**installer.ps1**](https://github.com/brokeDude2901/Purity_UwU/releases/download/v1.0/installer.ps1) and put it into your Working Directory | self-explanatory
 4 | Enable local Powershell Script Execution:<br />*Change execution policy to allow local PowerShell scripts to run without signing. Require signing for remote scripts*| ![image](https://www.itechtics.com/wp-content/uploads/2022/03/settings-app.jpg?ezimgfmt=ng:webp/ngcb203) ![image](https://www.tenforums.com/attachments/tutorials/87112d1485968588t-change-powershell-script-execution-policy-windows-10-a-currentuser_powershell_execution_policy_in_settings.png?s=afa02f708caa53b062f586d3173c79e0)
 4 | Right-click **installer.ps1** script and choose **Run with Powershell** | self-explanatory
 
