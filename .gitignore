@@ -1,0 +1,9 @@
+*.log
+*.exe
+*.zip
+git_push.ps1
+git_pull.ps1
+ffmpeg-master-latest-win64-gpl/
+Practical-RIFE/
+Real-ESRGAN/
+stable-diffusion/
