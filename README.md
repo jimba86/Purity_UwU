@@ -74,6 +74,7 @@ Step | Description | Illustration
 1 | 1. Right click on any file, or folder as input<br/>2. Pick the tool you want to run | ![image](https://user-images.githubusercontent.com/46110534/197253052-476ad716-5655-4b1e-9dd1-cfb2160d55d9.jpg)
 2 | 1. Input desired values<br/>2. Wait for Windows Explorer to open Results Location<br/> | ____________________________________________________![image](https://user-images.githubusercontent.com/46110534/197257668-3afa304f-0164-4a67-b2a8-94881458cd3a.gif)
 
+# FAQ
 ### Low VRAM Solution
 It is possible to run on GPU with low VRAM (4GB~6GB), preventing **CUDA out of memory*** error. However, you must scarify quality and speed.
 Component | Solution
@@ -85,6 +86,11 @@ Stable-Diffusion | 1. Use a smaller output image value: H (256), W (256). Then u
  - **Reason:** These tools were originally built and optimized for a high VRAM but low CUDA Cores GPU (Google Colab [***Tesla T4 16GB***](https://www.techpowerup.com/gpu-specs/tesla-t4.c3316) Turing ~ 2560 CUDA Cores)
  - **Solution:** If you still have VRAM left, just run another instance of the tool to ultilize the rest of the GPU CUDA Cores
 
+### Run without GPU ?
+ - Yes, you can run without GPU but it is really slow, and some codes will have to be rewritten because CPU doesnt support FP16
+### Intel and AMD GPU Support ?
+ - **AMD**: No, currently ***PyTorch ROCm*** is only available for Linux, use ***WSL2*** if you have an ***AMD GPU***
+ - **Intel**: No, [***Intel PyTorch Extension***](https://pytorch.org/tutorials/recipes/recipes/intel_extension_for_pytorch.html) is only for Intel AVX-512 CPU
 # Support Development (Optional)
  - If you find this tool useful, please share with your friends :smiley:
  - If you find this tool is saving you a lot of time and headaches, feel free to donate to support development, adding more components, features and optimization :smiling_face_with_three_hearts: [**Patreon**](https://patreon.com/Purity_UwU)
