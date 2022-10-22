@@ -61,7 +61,7 @@ try {
 	Output-Msg -primary 'PyTorch-1.12.1+cu116 ' -secondary 'Installing'
 	python3 -m pip install --upgrade pip
 	#pip3 uninstall torch torchvision torchaudio
-	pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116 
+	pip3 install torch torchvision torchaudio basicsr --force-reinstall --extra-index-url https://download.pytorch.org/whl/cu116 
 	python3 ./setup/check_gpu.py
 	Output-Msg -primary 'PyTorch-1.12.1+cu116 ' -secondary 'Success'
 }
