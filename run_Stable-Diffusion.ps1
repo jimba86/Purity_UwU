@@ -46,9 +46,18 @@ $model_name = Read-Host -Prompt 'model_name (default=default)'
 $prompt = Read-Host -Prompt 'prompt (mandatory)'
 $ddim_steps = Read-Host -Prompt 'ddim_steps (default=50)'
 $ddim_eta = Read-Host -Prompt 'ddim_eta (default=2)'
-$H = Read-Host -Prompt 'H (default=512)'
-$W = Read-Host -Prompt 'W (default=512)'
-$C = Read-Host -Prompt 'C (default=4)'
+
+if ($args[0])
+{
+	Write-Host ''
+}
+else {
+	$H = Read-Host -Prompt 'H (default=512)'
+	$W = Read-Host -Prompt 'W (default=512)'
+	$C = Read-Host -Prompt 'C (default=4)'
+}
+
+
 $n_iter = Read-Host -Prompt 'n_iter (default=2)'
 $n_samples = Read-Host -Prompt 'n_samples (default=3)'
 $f = Read-Host -Prompt 'f (default=8)'
