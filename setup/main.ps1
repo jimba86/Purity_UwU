@@ -148,8 +148,8 @@ if ($decision -eq 0) {
 		Output-Msg -primary 'Stable-Diffusion ' -secondary 'Installing'
 		git clone https://github.com/CompVis/stable-diffusion
 		#pip3 install -r ./stable-diffusion/requirements.txt 
-		pip3 install taming-transformers-rom1504 transformers==4.19.2 diffusers invisible-watermark 
-
+		pip3 install taming-transformers-rom1504 transformers==4.19.2 diffusers invisible-watermark einops
+		 
 		# create 3 empty __init__.py inside ldm
 		Copy-Item './setup/__init__.py' -Destination './stable-diffusion/ldm/__init__.py' -Force
 		Copy-Item './setup/__init__.py' -Destination './stable-diffusion/ldm/models/__init__.py' -Force
