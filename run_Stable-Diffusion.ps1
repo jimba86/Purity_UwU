@@ -106,7 +106,7 @@ if ($seed){ $options += " --seed $seed" }
 if ($args[0])
 {
 	$input_image = $args[0]
-	$options += "--init-img $input_image"
+	$options += " --init-img $input_image"
 	[pscustomobject]@{'init-img' = $video} | Format-Table
 	$strength = Read-Host -Prompt 'strength (default=0.75)'
 	if ($seed){ $options += " --strength $strength" }
