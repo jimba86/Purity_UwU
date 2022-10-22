@@ -24,7 +24,7 @@ Component | Info | Usage | GPU VRAM Usage
 
 
 ### Stable-Diffusion
-Please refer to this article on how to use Stable-Diffusion, there are several options you need to understand : https://www.howtogeek.com/833169/how-to-write-an-awesome-stable-diffusion-prompt
+Please refer to this article on how to use ***Stable-Diffusion***, there are several options you need to understand : https://www.howtogeek.com/833169/how-to-write-an-awesome-stable-diffusion-prompt
 Model | Sample
 ------------- | -------------
 [**Default**]<br/>Example Prompts:<br/>A high tech solarpunk utopia in the Amazon rainforest<br/>A pikachu fine dining with a view to the Eiffel Tower<br/>A mecha robot in a favela in expressionist style<br/>an insect robot preparing a delicious meal | ![image](https://github.com/CompVis/stable-diffusion/raw/main/assets/stable-samples/txt2img/merged-0005.png) ![image](https://github.com/CompVis/stable-diffusion/raw/main/assets/stable-samples/txt2img/merged-0007.png) 
@@ -76,11 +76,11 @@ Step | Description | Illustration
 
 # FAQ
 ### Low VRAM Solution
-It is possible to run on GPU with low VRAM (4GB~6GB), preventing **CUDA out of memory*** error. However, you must scarify quality and speed.
+It is possible to run on GPU with low VRAM (4GB~6GB) without **CUDA out of memory*** error. However, you must scarify ***quality*** and ***speed***.
 Component | Solution
 ------------- | -------------
-Real-ESRGAN | 1. Use a smaller resolution input image: resize, downscale the image to lower resolution<br/> 2. Try a smaller model size: ie, use ***RealESRGAN_x2plus*** model instead of ***RealESRGAN_x4plus*** <br/> 3. Use tile_size value different than 0. It will splits the image into multiple tiles, causing Face Restoration artifacts if the face parts was between the split, and take more times to execute. There is a tile padding options to reduce this behavior in the code, but somehow it doesn't work properly yet
-Stable-Diffusion | 1. Use a smaller output image value: H (256), W (256). Then use Real-ESRGAN to upscale that result.<br/> 2. Wait for the next update, there will be FP16 mode (Half-Precision)  instead of current FP32 mode (Single-Precision), saving VRAM
+Real-ESRGAN | 1. Use a smaller resolution input image: resize, downscale the image to lower resolution<br/> 2. Try a smaller model size: ie, use ***RealESRGAN_x2plus*** model instead of ***RealESRGAN_x4plus*** <br/> 3. Use **tile_size** value different than 0. It will splits the image into multiple tiles, causing **Face Restoration artifacts** if the facial parts was between the split, and take more times to execute. There is a tile padding options to reduce this behavior in the code, but somehow it doesn't work properly yet
+Stable-Diffusion | 1. Use a smaller output image value: H (256), W (256). Then use Real-ESRGAN to upscale that result.<br/> 2. Wait for the next update, there will be **FP16** mode (Half-Precision)  instead of current **FP32** mode (Single-Precision), saving VRAM
 
 ### Low GPU Ultilization Problems
  - **Reason:** These tools were originally built and optimized for a high VRAM but low CUDA Cores GPU (Google Colab [***Tesla T4 16GB***](https://www.techpowerup.com/gpu-specs/tesla-t4.c3316) Turing ~ 2560 CUDA Cores)
