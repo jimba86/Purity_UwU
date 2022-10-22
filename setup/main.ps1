@@ -49,13 +49,16 @@ Function Output-Msg {
 	}
 }
 
-#Write-Host 'Removing old Windows Explorer context menu ...'
-#Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Real-ESRGAN_image -Force -Recurse
-#Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Real-ESRGAN_video -Force -Recurse
-#Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Practical-RIFE -Force -Recurse
-#Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image -Force -Recurse
-#Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_prompt-only -Force -Recurse
+Write-Host 'Removing old Windows Explorer context menu ...'
+Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Real-ESRGAN_image -Force -Recurse
+Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Real-ESRGAN_video -Force -Recurse
+Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Practical-RIFE -Force -Recurse
+Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_text2image -Force -Recurse
+Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image2image -Force -Recurse
 
+# old name
+Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_prompt-only -Force -Recurse
+Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image -Force -Recurse
 taskkill /f /im "python3.10.exe"
 # PyTorch-CUDA
 try {
@@ -148,7 +151,7 @@ if ($decision -eq 0) {
 		Output-Msg -primary 'Stable-Diffusion ' -secondary 'Installing'
 		git clone https://github.com/CompVis/stable-diffusion
 		#pip3 install -r ./stable-diffusion/requirements.txt 
-		pip3 install taming-transformers-rom1504 transformers==4.19.2 diffusers invisible-watermark einops
+		pip3 install taming-transformers-rom1504 transformers==4.19.2 diffusers invisible-watermark einops clip kornia
 		 
 		# create 3 empty __init__.py inside ldm
 		Copy-Item './setup/__init__.py' -Destination './stable-diffusion/ldm/__init__.py' -Force
@@ -166,13 +169,13 @@ if ($decision -eq 0) {
 		Copy-Item ./setup/file_based_local_timer.py -Destination $patch_file -force
 		pip3 install ./stable-diffusion
 
-		New-Item -Path HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image
-		New-Item -Path HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image\command
-		Set-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image\command -Value "powershell -File `"$currentloc\run_Stable-Diffusion.ps1`" `"%1`""
+		New-Item -Path HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image2image
+		New-Item -Path HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image2image\command
+		Set-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image2image\command -Value "powershell -File `"$currentloc\run_Stable-Diffusion.ps1`" `"%1`""
 
-		New-Item -Path HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_prompt-only
-		New-Item -Path HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_prompt-only\command
-		Set-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_prompt-only\command -Value "powershell -File `"$currentloc\run_Stable-Diffusion.ps1`""
+		New-Item -Path HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_text2image
+		New-Item -Path HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_text2image\command
+		Set-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_text2image\command -Value "powershell -File `"$currentloc\run_Stable-Diffusion.ps1`""
 
 		Output-Msg -primary 'Stable-Diffusion ' -secondary 'Success'
 

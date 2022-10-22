@@ -2,15 +2,15 @@ cd $PSScriptRoot
 
 if ($args[0])
 {
-	Write-Host '+======================================+'
-	Write-Host '| Stable-Diffusion (Prompt+Init-Image) |'
-	Write-Host '+======================================+'
+	Write-Host '+===================================+'
+	Write-Host '| Stable-Diffusion (Image-To-Image) |'
+	Write-Host '+===================================+'
 }
 else
 {
-	Write-Host '+================================+'
-	Write-Host '| Stable-Diffusion (Prompt-Only) |'
-	Write-Host '+================================+'
+	Write-Host '+===============================================+'
+	Write-Host '| Stable-Diffusion (Prompt-Only, Text-To-Image) |'
+	Write-Host '+===============================================+'
 }
 
 cd .\stable-diffusion\
@@ -103,24 +103,31 @@ if ($f){ $options += " --f $f" }
 if ($scale){ $options += " --scale $scale" }
 if ($seed){ $options += " --seed $seed" }
 
+if ($ckpt)
+{
+	$options += " --prompt '$prompt' --ckpt '$ckpt'"
+}
+else
+{
+	$options += " --prompt '$prompt'"
+}
+
 if ($args[0])
 {
 	$input_image = $args[0]
 	$options += " --init-img $input_image"
-	[pscustomobject]@{'init-img' = $video} | Format-Table
+	[pscustomobject]@{'init-img' = $input_image} | Format-Table
 	$strength = Read-Host -Prompt 'strength (default=0.75)'
 	if ($seed){ $options += " --strength $strength" }
+	Invoke-Expression "python3 -W ignore scripts/img2img.py $options"
+	[pscustomobject]@{'Results Location' = "$PSScriptRoot\stable-diffusion\outputs\txt2img-samples"} | Format-Table 
+	Invoke-Item "$PSScriptRoot\stable-diffusion\outputs\img2img-samples"
 }
-if ($ckpt)
-{
-	Invoke-Expression "python3 -W ignore scripts/txt2img_nsfw.py $options --prompt '$prompt' --ckpt '$ckpt'"
+else {
+	Invoke-Expression "python3 -W ignore scripts/txt2img_nsfw.py $options"
+	[pscustomobject]@{'Results Location' = "$PSScriptRoot\stable-diffusion\outputs\txt2img-samples"} | Format-Table 
+	Invoke-Item "$PSScriptRoot\stable-diffusion\outputs\txt2img-samples"
 }
-else
-{
-	Invoke-Expression "python3 -W ignore scripts/txt2img_nsfw.py $options --prompt '$prompt'"
-}
-[pscustomobject]@{'Results Location' = "$PSScriptRoot\stable-diffusion\outputs\txt2img-samples"} | Format-Table 
 
-Invoke-Item "$PSScriptRoot\stable-diffusion\outputs\txt2img-samples"
 Start-Sleep -Seconds 10
 
