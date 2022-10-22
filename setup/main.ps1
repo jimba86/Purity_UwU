@@ -56,6 +56,7 @@ Function Output-Msg {
 #Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image -Force -Recurse
 #Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_prompt-only -Force -Recurse
 
+taskkill /f /im "python3.10.exe"
 # PyTorch-CUDA
 try {
 	Output-Msg -primary 'PyTorch-1.12.1+cu116 ' -secondary 'Installing'
