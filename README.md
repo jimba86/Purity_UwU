@@ -24,6 +24,7 @@ Component | Info | Usage | GPU VRAM Usage
 
 
 ### Stable-Diffusion
+Please refer to this article on how to use Stable-Diffusion, there are several options you need to understand : https://www.howtogeek.com/833169/how-to-write-an-awesome-stable-diffusion-prompt
 Model | Sample
 ------------- | -------------
 [**Default**]<br/>Example Prompts:<br/>A high tech solarpunk utopia in the Amazon rainforest<br/>A pikachu fine dining with a view to the Eiffel Tower<br/>A mecha robot in a favela in expressionist style<br/>an insect robot preparing a delicious meal | ![image](https://github.com/CompVis/stable-diffusion/raw/main/assets/stable-samples/txt2img/merged-0005.png) ![image](https://github.com/CompVis/stable-diffusion/raw/main/assets/stable-samples/txt2img/merged-0007.png) 
@@ -73,12 +74,15 @@ Step | Description | Illustration
 1 | 1. Right click on any file, or folder as input<br/>2. Pick the tool you want to run | ![image](https://user-images.githubusercontent.com/46110534/197253052-476ad716-5655-4b1e-9dd1-cfb2160d55d9.jpg)
 2 | 1. Input desired values<br/>2. Wait for Windows Explorer to open Results Location<br/> | ____________________________________________________![image](https://user-images.githubusercontent.com/46110534/197257668-3afa304f-0164-4a67-b2a8-94881458cd3a.gif)
 
-### Low VRAM Instructions
-It is possible to run on GPU with low VRAM (4GB), prevent **CUDA out of memory***. However, you must scarify quality and speed.
+### Low VRAM Solution
+It is possible to run on GPU with low VRAM (4GB~6GB), preventing **CUDA out of memory*** error. However, you must scarify quality and speed.
 Component | Solution
 ------------- | -------------
 Real-ESRGAN | 1. Use a smaller resolution input image: resize, downscale the image to lower resolution<br/> 2. Try a smaller model size: ie, use ***RealESRGAN_x2plus*** model instead of ***RealESRGAN_x4plus*** <br/> 3. Use tile_size value different than 0. It will splits the image into multiple tiles, causing Face Restoration artifacts if the face parts was between the split, and take more times to execute. There is a tile padding options to reduce this behavior in the code, but somehow it doesn't work properly yet
-Stable-Diffusion | 1. Use a smaller output image value: H (256), W (256). Then use Real-ESRGAN to upscale that result.<br/> 2. Wait for the next update, there will be FP16 mode (Half-Precision)  instead of current FP32 mode (Single-Precision), saving GPU memory
+Stable-Diffusion | 1. Use a smaller output image value: H (256), W (256). Then use Real-ESRGAN to upscale that result.<br/> 2. Wait for the next update, there will be FP16 mode (Half-Precision)  instead of current FP32 mode (Single-Precision), saving VRAM
+
+### Low GPU Ultilization Solution
+This can happen with Real-ESRGAN (I/O Bottleneck on Tiny Model) and Practical-RIFE (CPU Bottleneck). If you still have VRAM left, just run another instance of the tool to ultilize the rest of the GPU.
 
 # Support Development (Optional)
  - If you find this tool useful, please share with your friends :smiley:
