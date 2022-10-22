@@ -75,8 +75,6 @@ try {
 	{
 		pip3 install torch torchvision torchaudio basicsr --force-reinstall --extra-index-url https://download.pytorch.org/whl/cu116
 	}
-	 
-	python3 ./setup/check_gpu.py
 	Output-Msg -primary 'PyTorch-1.12.1+cu116 ' -secondary 'Success'
 }
 catch {
