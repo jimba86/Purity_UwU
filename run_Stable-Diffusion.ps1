@@ -120,7 +120,7 @@ if ($args[0])
 	$strength = Read-Host -Prompt 'strength (default=0.75)'
 	if ($seed){ $options += " --strength $strength" }
 	Invoke-Expression "python3 -W ignore scripts/img2img.py $options"
-	[pscustomobject]@{'Results Location' = "$PSScriptRoot\stable-diffusion\outputs\txt2img-samples"} | Format-Table 
+	[pscustomobject]@{'Results Location' = "$PSScriptRoot\stable-diffusion\outputs\img2img-samples"} | Format-Table 
 	Invoke-Item "$PSScriptRoot\stable-diffusion\outputs\img2img-samples"
 }
 else {
