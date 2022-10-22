@@ -158,9 +158,10 @@ if ($decision -eq 0) {
 
 		# patch pytorch SIGKILL to SIGINT
 		Write-Host 'Patching PyTorch SIGNIT ...' -f green
-		$var = pip show torch | Select-String -Pattern "Location:" -SimpleMatch 
+		#$var = pip show torch | Select-String -Pattern "Location:" -SimpleMatch
+		$var = pip3 list -v | Select-String -Pattern "\btorch\b"		
 		$new_array = $var -split "\s+"
-		$patch_file = $new_array[1] +'\torch\distributed\elastic\timer\file_based_local_timer.py'
+		$patch_file = $new_array[2] +'\torch\distributed\elastic\timer\file_based_local_timer.py'
 		Write-Host $patch_file
 		Copy-Item ./setup/file_based_local_timer.py -Destination $patch_file -force
 		pip3 install ./stable-diffusion
