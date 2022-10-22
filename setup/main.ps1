@@ -49,7 +49,7 @@ Function Output-Msg {
 	}
 }
 
-Write-Host 'Removing old Windows Explorer context menu ...'
+Write-Host 'Removing old Windows Explorer context menu ...' -f green
 Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Real-ESRGAN_image -Force -Recurse
 Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Real-ESRGAN_video -Force -Recurse
 Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Practical-RIFE -Force -Recurse
@@ -59,13 +59,23 @@ Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_ima
 # old name
 Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_prompt-only -Force -Recurse
 Remove-Item -LiteralPath HKLM:\SOFTWARE\Classes\*\shell\run_Stable-Diffusion_image -Force -Recurse
-taskkill /f /im "python3.10.exe"
+
+# kill all python3.10 running process
+taskkill /f /im "python3.10.exe" 2> $null
+
 # PyTorch-CUDA
 try {
 	Output-Msg -primary 'PyTorch-1.12.1+cu116 ' -secondary 'Installing'
 	python3 -m pip install --upgrade pip
-	#pip3 uninstall torch torchvision torchaudio
-	pip3 install torch torchvision torchaudio basicsr --force-reinstall --extra-index-url https://download.pytorch.org/whl/cu116 
+	$var = pip show torch | Select-String -Pattern "cu116"
+	if ($var) {
+		pip3 install torch torchvision torchaudio basicsr --extra-index-url https://download.pytorch.org/whl/cu116
+	}
+	else 
+	{
+		pip3 install torch torchvision torchaudio basicsr --force-reinstall --extra-index-url https://download.pytorch.org/whl/cu116
+	}
+	 
 	python3 ./setup/check_gpu.py
 	Output-Msg -primary 'PyTorch-1.12.1+cu116 ' -secondary 'Success'
 }
@@ -161,11 +171,10 @@ if ($decision -eq 0) {
 
 		# patch pytorch SIGKILL to SIGINT
 		Write-Host 'Patching PyTorch SIGNIT ...' -f green
-		#$var = pip show torch | Select-String -Pattern "Location:" -SimpleMatch
 		$var = pip3 list -v | Select-String -Pattern "\btorch\b"		
 		$new_array = $var -split "\s+"
 		$patch_file = $new_array[2] +'\torch\distributed\elastic\timer\file_based_local_timer.py'
-		Write-Host $patch_file
+		Write-Host $patch_file -f yellow
 		Copy-Item ./setup/file_based_local_timer.py -Destination $patch_file -force
 		pip3 install ./stable-diffusion
 
