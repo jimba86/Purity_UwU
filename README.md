@@ -81,8 +81,9 @@ Component | Solution
 Real-ESRGAN | 1. Use a smaller resolution input image: resize, downscale the image to lower resolution<br/> 2. Try a smaller model size: ie, use ***RealESRGAN_x2plus*** model instead of ***RealESRGAN_x4plus*** <br/> 3. Use tile_size value different than 0. It will splits the image into multiple tiles, causing Face Restoration artifacts if the face parts was between the split, and take more times to execute. There is a tile padding options to reduce this behavior in the code, but somehow it doesn't work properly yet
 Stable-Diffusion | 1. Use a smaller output image value: H (256), W (256). Then use Real-ESRGAN to upscale that result.<br/> 2. Wait for the next update, there will be FP16 mode (Half-Precision)  instead of current FP32 mode (Single-Precision), saving VRAM
 
-### Low GPU Ultilization Solution
-This can happen with Real-ESRGAN (I/O Bottleneck on Tiny Model) and Practical-RIFE (CPU Bottleneck). If you still have VRAM left, just run another instance of the tool to ultilize the rest of the GPU.
+### Low GPU Ultilization Problems
+ - **Reason:** These tools were originally built and optimized for a high VRAM but low CUDA Cores GPU (Google Colab [***Tesla T4 16GB***](https://www.techpowerup.com/gpu-specs/tesla-t4.c3316) Turing ~ 2560 CUDA Cores)
+ - **Solution:** If you still have VRAM left, just run another instance of the tool to ultilize the rest of the GPU CUDA Cores
 
 # Support Development (Optional)
  - If you find this tool useful, please share with your friends :smiley:
